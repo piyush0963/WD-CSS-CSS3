@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Positioning Practice – Flipkart, Instagram, Zomato, YouTube</title>
+
+  <style>
+    /* ============================================================
+       Global styling
+       ============================================================ */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f5f6f7;
+      color: #222;
+      padding-bottom: 80px; /* space for floating Order Now button */
+    }
+    .section {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .section-title {
+      font-size: 22px;
+      color: #1a1a2e;
+      margin-bottom: 18px;
+      border-left: 5px solid #2874f0;
+      padding-left: 12px;
+    }
+
+    /* ============================================================
+       TASK 1: Flipkart-style product cards
+       Uses margin, padding, border to separate each product
+       ============================================================ */
+    .products-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;                 /* space between cards */
+      justify-content: center;
+    }
+    .product-card {
+      background-color: white;
+      width: 260px;
+      padding: 20px;             /* inner spacing */
+      margin: 10px;              /* outer spacing */
+      border: 1px solid #e0e0e0; /* subtle border to separate visually */
+      border-radius: 8px;
+      text-align: center;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+    .product-card:hover {
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+      transform: translateY(-4px);
+    }
+    .product-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .product-card h3 {
+      font-size: 17px;
+      margin: 14px 0 6px;
+      color: #212121;
+    }
+    .product-card .price {
+      color: #388e3c;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .product-card .old-price {
+      color: #999;
+      text-decoration: line-through;
+      font-size: 13px;
+      margin-left: 6px;
+    }
+    .product-card .rating {
+      display: inline-block;
+      background-color: #388e3c;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 8px;
+    }
+
+    /* ============================================================
+       TASK 2: Instagram story bar
+       Uses box-sizing: border-box so border + padding
+       don't change the circle's overall size
+       ============================================================ */
+    .story-bar {
+      display: flex;
+      gap: 18px;
+      background-color: white;
+      padding: 18px;
+      border-radius: 12px;
+      overflow-x: auto;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+    .story {
+      /* Key line: box-sizing keeps the width exactly 80px
+         even with border and padding applied */
+      box-sizing: border-box;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid #d62976;   /* Instagram pink ring */
+      padding: 3px;                /* inner gap between ring and photo */
+      flex-shrink: 0;              /* prevent squashing in the row */
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .story:hover { transform: scale(1.06); }
+    .story img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+    .story-name {
+      font-size: 11px;
+      text-align: center;
+      color: #555;
+      margin-top: 6px;
+    }
+
+    /* ============================================================
+       TASK 3: Zomato-style floating 'Order Now' button
+       position: fixed pins it to the viewport, so it stays
+       visible while scrolling
+       ============================================================ */
+    .order-now-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #e23744;   /* Zomato red */
+      color: white;
+      font-weight: bold;
+      font-size: 15px;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(226, 55, 68, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      z-index: 500;
+    }
+    .order-now-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 26px rgba(226, 55, 68, 0.6);
+    }
+
+    /* ============================================================
+       TASK 4: YouTube-style sticky navigation bar
+       position: sticky keeps it visible at the top while
+       scrolling through the long list of video thumbnails
+       ============================================================ */
+    .yt-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 12px 24px;
+      border-bottom: 1px solid #e0e0e0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    .yt-nav .yt-logo {
+      font-weight: bold;
+      color: #ff0000;
+      font-size: 22px;
+      letter-spacing: -1px;
+    }
+    .yt-nav input {
+      flex: 1;
+      max-width: 400px;
+      padding: 8px 14px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      font-size: 14px;
+      outline: none;
+    }
+    .yt-nav input:focus {
+      border-color: #1a73e8;
+    }
+    .yt-nav .icon {
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Video grid */
+    .video-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 25px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .video-card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      width: 300px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+    .video-card:hover { transform: translateY(-4px); }
+    .video-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+    }
+    .video-card .meta {
+      padding: 12px 14px 16px;
+    }
+    .video-card h4 {
+      font-size: 15px;
+      margin-bottom: 6px;
+      color: #0f0f0f;
+    }
+    .video-card p {
+      font-size: 12px;
+      color: #606060;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       TASK 4: YouTube-style sticky nav bar
+       ============================================================ -->
+  <nav class="yt-nav" aria-label="YouTube Navigation">
+    <span class="yt-logo">▶ YouTube</span>
+    <input type="text" placeholder="Search videos..." aria-label="Search videos">
+    <span class="icon" title="Notifications">🔔</span>
+    <span class="icon" title="Profile">👤</span>
+  </nav>
+
+  <!-- ============================================================
+       TASK 1: Flipkart-style product cards (2 side by side)
+       ============================================================ -->
+  <section class="section">
+    <h2 class="section-title">Flipkart-Style Product Cards</h2>
+
+    <div class="products-row">
+
+      <!-- Product 1 -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"
+             alt="Black wireless over-ear headphones">
+        <h3>boAt Rockerz 450</h3>
+        <p>
+          <span class="price">₹1,499</span>
+          <span class="old-price">₹3,990</span>
+        </p>
+        <span class="rating">★ 4.3</span>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400"
+             alt="White wireless earbuds with charging case">
+        <h3>OnePlus Buds Z2</h3>
+        <p>
+          <span class="price">₹2,999</span>
+          <span class="old-price">₹4,999</span>
+        </p>
+        <span class="rating">★ 4.5</span>
+      </div>
+
+      <!-- Product 3 (bonus) -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400"
+             alt="Modern smartphone with a blue gradient back">
+        <h3>Realme Narzo 60</h3>
+        <p>
+          <span class="price">₹17,999</span>
+          <span class="old-price">₹21,999</span>
+        </p>
+        <span class="rating">★ 4.2</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TASK 2: Instagram story bar (5 circles)
+       ============================================================ -->
+  <section class="section">
+    <h2 class="section-title">Instagram Story Bar</h2>
+
+    <div class="story-bar">
+
+      <div>
+        <div class="story">
+          <img src="https://i.pravatar.cc/150?img=1" alt="Story by Aisha">
+        </div>
+        <p class="story-name">aisha</p>
+      </div>
+
+      <div>
+        <div class="story">
+          <img src="https://i.pravatar.cc/150?img=2" alt="Story by Rohan">
+        </div>
+        <p class="story-name">rohan</p>
+      </div>
+
+      <div>
+        <div class="story">
+          <img src="https://i.pravatar.cc/150?img=3" alt="Story by Priya">
+        </div>
+        <p class="story-name">priya</p>
+      </div>
+
+      <div>
+        <div class="story">
+          <img src="https://i.pravatar.cc/150?img=4" alt="Story by Karan">
+        </div>
+        <p class="story-name">karan</p>
+      </div>
+
+      <div>
+        <div class="story">
+          <img src="https://i.pravatar.cc/150?img=5" alt="Story by Neha">
+        </div>
+        <p class="story-name">neha</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TASK 4: Long list of video thumbnails for scrolling test
+       ============================================================ -->
+  <section class="section">
+    <h2 class="section-title">YouTube Video Grid (scroll to test sticky nav)</h2>
+  </section>
+
+  <div class="video-grid">
+    <article class="video-card">
+      <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400" alt="Tech review thumbnail">
+      <div class="meta">
+        <h4>Top 10 Budget Phones in 2025</h4>
+        <p>Tech With Rahul · 1.2M views · 2 days ago</p>
+      </div>
+    </article>
+
+    <article class="video-card">
+      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400" alt="Coding tutorial thumbnail">
+      <div class="meta">
+        <h4>Learn Flexbox in 20 Minutes</h4>
+        <p>Dev Simplified · 890K views · 1 week ago</p>
+      </div>
+    </article>
+
+    <article class="video-card">
+      <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=400" alt="Burger close-up">
+      <div class="meta">
+        <h4>India's Best Burger Review</h4>
+        <p>Foodie Diaries · 540K views · 3 days ago</p>
+      </div>
+    </article>
+
+    <article class="video-card">
+      <img src="https://images.unsplash.com/photo-1533228100845-08145b01de14?w=400" alt="Cricket stadium">
+      <div class="meta">
+        <h4>Top 10 IPL Moments of All Time</h4>
+        <p>Cricket World · 3.4M views · 5 days ago</p>
+      </div>
+    </article>
+
+    <article class="video-card">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400" alt="Biryani dish">
+      <div class="meta">
+        <h4>How to Make Perfect Hyderabadi Biryani</h4>
+        <p>Chef's Kitchen · 2.1M views · 1 month ago</p>
+      </div>
+    </article>
+
+    <article class="video-card">
+      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400" alt="Team coding">
+      <div class="meta">
+        <h4>Front-End Internship Tips</h4>
+        <p>Career Code · 320K views · 2 weeks ago</p>
+      </div>
+    </article>
+
+    <article class="video-card">
+      <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400" alt="Team meeting">
+      <div class="meta">
+        <h4>Day in the Life of a Developer</h4>
+        <p>Coding with Sneha · 780K views · 4 days ago</p>
+      </div>
+    </article>
+
+    <article class="video-card">
+      <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400" alt="Code on screen">
+      <div class="meta">
+        <h4>CSS Positioning Explained</h4>
+        <p>Web Dev Simplified · 1.1M views · 3 weeks ago</p>
+      </div>
+    </article>
+  </div>
+
+  <!-- ============================================================
+       TASK 3: Zomato-style floating Order Now button
+       ============================================================ -->
+  <button class="order-now-btn" onclick="alert('Order placed! Enjoy your meal 🍔')">
+    🍔 Order Now
+  </button>
+
+</body>
+</html>
