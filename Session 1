@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zomato Restaurant Page – CSS Practice (All-in-One)</title>
+
+  <!-- ============================================================
+       TASK 2: Internal CSS
+       This sets the paragraph color to BLUE.
+       But the paragraph also has an INLINE style setting it to PURPLE.
+       Inline wins → PURPLE is displayed.
+       See the documentation section at the bottom for the full explanation.
+       ============================================================ -->
+  <style>
+    /* ---------- Global styling ---------- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f5f6f7;
+      color: #222;
+      line-height: 1.6;
+      padding: 30px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 35px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    }
+
+    /* ============================================================
+       TASK 1: Heading with unique background color
+       ============================================================ */
+    #restaurant-name {
+      background-color: #e23744;   /* Zomato red */
+      color: white;
+      padding: 18px 22px;
+      border-radius: 10px;
+      font-size: 30px;
+      letter-spacing: 0.5px;
+      margin-bottom: 22px;
+    }
+
+    /* ============================================================
+       TASK 2: Internal CSS sets paragraph color to BLUE.
+       (Overridden by the inline style on the element → see HTML)
+       ============================================================ */
+    #description {
+      color: blue;
+      font-size: 17px;             /* different font size (Task 1) */
+      margin-bottom: 28px;
+      line-height: 1.75;
+    }
+
+    h2 {
+      font-size: 22px;
+      color: #1a1a2e;
+      margin-bottom: 14px;
+    }
+
+    /* ============================================================
+       TASK 3: Class selector — all menu items italic + green
+       ============================================================ */
+    .menu-item {
+      font-style: italic;
+      color: green;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      border-radius: 6px;
+      list-style-position: inside;
+      transition: background-color 0.2s ease;
+    }
+
+    /* ============================================================
+       TASK 3: ID selector — highlight the chef's special
+       ============================================================ */
+    #chef-special {
+      background-color: #fff3cd;
+      color: #b8860b;
+      font-weight: bold;
+      border-left: 5px solid #e23744;
+    }
+
+    /* ============================================================
+       TASK 4: Grouping selector — one border rule for heading + menu items
+       ============================================================ */
+    #restaurant-name,
+    .menu-item {
+      border: 2px solid #e23744;
+    }
+
+    /* ---------- Documentation section styling ---------- */
+    .docs {
+      margin-top: 40px;
+      padding: 30px;
+      background-color: #fafafa;
+      border-radius: 12px;
+      border-left: 5px solid #e23744;
+    }
+    .docs h2 {
+      color: #e23744;
+      margin-bottom: 18px;
+    }
+    .docs h3 {
+      color: #1a1a2e;
+      margin: 22px 0 10px;
+      font-size: 18px;
+    }
+    .docs p, .docs li {
+      color: #333;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .docs ul, .docs ol {
+      margin-left: 22px;
+      margin-bottom: 12px;
+    }
+    .docs code {
+      background-color: #f0e6e6;
+      color: #c0392b;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: 'Courier New', monospace;
+    }
+    .docs pre {
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      padding: 14px 18px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 10px 0 16px;
+      font-family: 'Courier New', monospace;
+    }
+    .docs table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      font-size: 14px;
+    }
+    .docs th, .docs td {
+      border: 1px solid #ddd;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .docs th {
+      background-color: #e23744;
+      color: white;
+    }
+    .docs tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .note {
+      background-color: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 12px 16px;
+      border-radius: 6px;
+      margin: 14px 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- ============================================================
+         TASK 1: Restaurant heading
+         ============================================================ -->
+    <h1 id="restaurant-name">Spice Route</h1>
+
+    <!-- ============================================================
+         TASK 2: Same paragraph has BOTH:
+         - Internal style (in <head>): color: blue
+         - Inline style (right here):  color: purple
+         Inline wins → PURPLE is displayed.
+         ============================================================ -->
+    <p id="description" style="color: purple;">
+      A cozy North Indian restaurant serving authentic biryani, kebabs,
+      and freshly baked naan — made with traditional recipes passed down
+      through generations.
+    </p>
+
+    <!-- ============================================================
+         TASK 1: Menu list
+         ============================================================ -->
+    <h2>Our Menu</h2>
+    <ul>
+      <li class="menu-item">Chicken Biryani</li>
+      <li class="menu-item">Paneer Butter Masala</li>
+      <li class="menu-item" id="chef-special">Chef's Special: Mutton Rogan Josh</li>
+      <li class="menu-item">Garlic Naan</li>
+      <li class="menu-item">Gulab Jamun</li>
+    </ul>
+
+    <!-- ============================================================
+         DOCUMENTATION (in-page README)
+         Explains each task and the CSS concepts used.
+         ============================================================ -->
+    <section class="docs">
+
+      <h2>📘 Project Documentation</h2>
+      <p>
+        This single file demonstrates <strong>4 core CSS concepts</strong>: external-style
+        rules (simulated with an internal <code>&lt;style&gt;</code> block for portability),
+        the <strong>cascade</strong>, class vs ID selectors, and grouping selectors.
+      </p>
+
+      <!-- ---------- Task 1 ---------- -->
+      <h3>🎯 Task 1 — Unique Heading Style + Different Paragraph Size</h3>
+      <p><strong>Requirement:</strong> A heading, a paragraph, and a menu list. The heading
+        needs a unique background colour; the paragraph needs a different font size.</p>
+      <pre>
+#restaurant-name {
+  background-color: #e23744;   /* Zomato red */
+  color: white;
+  padding: 18px 22px;
+  border-radius: 10px;
+  font-size: 30px;
+}
+
+#description {
+  font-size: 17px;              /* different from the rest */
+  line-height: 1.75;
+}</pre>
+      <p><strong>Result:</strong> The "Spice Route" heading has a red background with white
+        text, and the description paragraph uses 17px — distinct from other text on the page.</p>
+
+      <!-- ---------- Task 2 ---------- -->
+      <h3>🎯 Task 2 — Inline vs Internal CSS (The Cascade)</h3>
+      <p>The description paragraph has <strong>two conflicting colour rules</strong>:</p>
+      <ul>
+        <li><strong>Internal</strong> (in <code>&lt;head&gt;</code>): <code>color: blue;</code></li>
+        <li><strong>Inline</strong> (on the element): <code>style="color: purple;"</code></li>
+      </ul>
+      <div class="note">
+        <strong>🎨 Displayed colour: PURPLE.</strong><br>
+        Inline styles have higher specificity than internal or external stylesheets, so they win.
+      </div>
+
+      <p><strong>CSS specificity order (highest → lowest):</strong></p>
+      <table>
+        <thead>
+          <tr><th>Priority</th><th>Selector Type</th><th>Example</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1 (highest)</td><td><code>!important</code></td><td><code>color: red !important;</code></td></tr>
+          <tr><td>2</td><td>Inline styles</td><td><code>style="color: purple;"</code> ✅ wins</td></tr>
+          <tr><td>3</td><td>ID selectors</td><td><code>#description { color: blue; }</code> ❌ overridden</td></tr>
+          <tr><td>4</td><td>Class selectors</td><td><code>.menu-item { color: green; }</code></td></tr>
+          <tr><td>5 (lowest)</td><td>Tag selectors</td><td><code>p { color: black; }</code></td></tr>
+        </tbody>
+      </table>
+
+      <p><strong>How to verify:</strong> Right-click the paragraph → <em>Inspect</em> → in the
+        Styles panel, the <code>color: blue</code> rule appears crossed out while
+        <code>color: purple</code> is applied.</p>
+
+      <!-- ---------- Task 3 ---------- -->
+      <h3>🎯 Task 3 — Class &amp; ID Selectors</h3>
+      <p><strong>Class selector</strong> styles every menu item the same way:</p>
+      <pre>
+.menu-item {
+  font-style: italic;
+  color: green;
+}</pre>
+      <p><strong>ID selector</strong> overrides one special item:</p>
+      <pre>
+#chef-special {
+  background-color: #fff3cd;
+  color: #b8860b;
+  font-weight: bold;
+  border-left: 5px solid #e23744;
+}</pre>
+
+      <p><strong>Class vs ID — key differences:</strong></p>
+      <table>
+        <thead>
+          <tr><th>Feature</th><th>Class (<code>.name</code>)</th><th>ID (<code>#name</code>)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Reusable?</td><td>✅ Yes, on many elements</td><td>❌ Only one per page</td></tr>
+          <tr><td>Specificity</td><td>Lower</td><td>Higher</td></tr>
+          <tr><td>Best for</td><td>Repeated styles</td><td>Unique, one-off styles</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ---------- Task 4 ---------- -->
+      <h3>🎯 Task 4 — Grouping Selector (DRY)</h3>
+      <p>One rule, one <code>border</code> declaration, applied to multiple elements:</p>
+      <pre>
+#restaurant-name,
+.menu-item {
+  border: 2px solid #e23744;
+}</pre>
+      <p>Without grouping, you'd write two separate rules and risk forgetting to update one when
+        the colour changes. Grouping keeps CSS <strong>DRY (Don't Repeat Yourself)</strong>.</p>
+
+      <!-- ---------- Summary ---------- -->
+      <h3>📚 Key Concepts Summary</h3>
+      <table>
+        <thead>
+          <tr><th>Concept</th><th>Key Takeaway</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>External / Internal CSS</td><td>Keeps HTML clean; reusable across pages</td></tr>
+          <tr><td>Inline vs Internal</td><td>Inline styles win due to higher specificity</td></tr>
+          <tr><td>Class vs ID</td><td>Classes = reusable; IDs = unique</td></tr>
+          <tr><td>Specificity order</td><td>!important &gt; inline &gt; ID &gt; class &gt; tag</td></tr>
+          <tr><td>Grouping selector</td><td>Comma-separated selectors share one rule</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ---------- Testing ---------- -->
+      <h3>🧪 Testing Checklist</h3>
+      <ul>
+        <li>☐ Heading "Spice Route" has a red background with white text</li>
+        <li>☐ Description paragraph shows <strong>purple</strong> (not blue) — cascade proof</li>
+        <li>☐ All menu items are italic and green</li>
+        <li>☐ "Chef's Special" has a yellow background with gold text</li>
+        <li>☐ A red border appears around the heading and all menu items</li>
+        <li>☐ DevTools → paragraph shows <code>color: blue</code> struck through</li>
+      </ul>
+
+      <div class="note">
+        <strong>💡 Tip:</strong> Open DevTools (F12) → Elements → click the paragraph to see
+        the cascade in the Styles panel live.
+      </div>
+
+    </section>
+
+  </div>
+
+</body>
+</html>
