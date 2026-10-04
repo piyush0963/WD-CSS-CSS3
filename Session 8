@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piyush Patidar | Front-End Developer &amp; UI Enthusiast</title>
+  <meta name="description"
+        content="Portfolio of Piyush Patidar — front-end intern, CSS enthusiast, and budding UI developer. Explore projects, skills, and get in touch.">
+  <meta name="keywords" content="Piyush Patidar, front-end developer, portfolio, HTML, CSS, JavaScript, intern">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+  <style>
+    /* ---------- Global ---------- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background-color: #f7f9fc;
+      color: #222;
+      line-height: 1.6;
+    }
+    section { padding: 70px 20px; }
+    .container { max-width: 1050px; margin: 0 auto; }
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 32px;
+      color: #1a1a2e;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      text-align: center;
+      color: #666;
+      margin-bottom: 40px;
+      font-size: 15px;
+    }
+
+    /* ============================================================
+       TASK 1: Navigation bar
+       ============================================================ */
+    nav {
+      background-color: #1a1a2e;
+      padding: 16px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .logo {
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      color: #ffc107;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: #eaeaea;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 15px;
+      padding: 6px 2px;
+      position: relative;
+      transition: color 0.25s ease;
+    }
+    .nav-links a:hover { color: #ffc107; }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 0;
+      height: 2px;
+      background-color: #ffc107;
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #5b2a86 100%);
+      color: white;
+      padding: 90px 20px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 48px;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+    .hero .tagline {
+      font-size: 18px;
+      opacity: 0.9;
+      margin-bottom: 25px;
+    }
+    .hero .cta-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 26px;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 15px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn-primary { background-color: #ffc107; color: #1a1a2e; }
+    .btn-outline { background-color: transparent; color: white; border: 2px solid white; }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ============================================================
+       TASK 2: About Me (image removed — full-width text)
+       ============================================================ */
+    .about { background-color: white; }
+    .about-content {
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .about h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 32px;
+      color: #6a1b9a;
+      margin-bottom: 22px;
+      letter-spacing: -0.5px;
+    }
+    .about p {
+      color: #444;
+      font-size: 16px;
+      line-height: 1.85;
+      margin-bottom: 14px;
+    }
+    .about p:last-child { margin-bottom: 0; }
+
+    /* ============================================================
+       Skills section
+       ============================================================ */
+    .skills { background-color: #f7f9fc; }
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .skill-card {
+      flex: 1 1 200px;
+      max-width: 240px;
+      background: white;
+      padding: 22px 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+      transition: transform 0.2s ease;
+    }
+    .skill-card:hover { transform: translateY(-5px); }
+    .skill-card .icon { font-size: 34px; margin-bottom: 10px; }
+    .skill-card h4 {
+      font-family: 'Poppins', sans-serif;
+      color: #1a1a2e;
+      margin-bottom: 10px;
+      font-size: 17px;
+    }
+    .progress-bar {
+      background: #eee;
+      border-radius: 10px;
+      height: 8px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .progress-bar span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #6a1b9a, #d6336c);
+      border-radius: 10px;
+    }
+
+    /* ============================================================
+       TASK 3: Projects — Flexbox responsive grid
+       ============================================================ */
+    .projects { background-color: white; }
+    .projects-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      justify-content: center;
+    }
+    .project-card {
+      flex: 1 1 280px;
+      max-width: 320px;
+      background-color: #f7f9fc;
+      border-radius: 12px;
+      padding: 25px 22px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.14);
+    }
+    .project-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 19px;
+      color: #d84315;
+      margin-bottom: 8px;
+    }
+    .project-card p { color: #555; font-size: 14px; }
+    .project-tag {
+      display: inline-block;
+      background-color: #f0e6ff;
+      color: #6a1b9a;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ============================================================
+       Stats bar
+       ============================================================ */
+    .stats { background-color: #1a1a2e; color: white; padding: 50px 20px; }
+    .stats-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      justify-content: space-around;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .stat { flex: 1 1 140px; }
+    .stat h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 36px;
+      color: #ffc107;
+      margin-bottom: 5px;
+    }
+    .stat p {
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    /* ============================================================
+       Experience timeline
+       ============================================================ */
+    .experience { background: #f7f9fc; }
+    .timeline {
+      max-width: 700px;
+      margin: 0 auto;
+      border-left: 3px solid #6a1b9a;
+      padding-left: 25px;
+    }
+    .timeline-item { position: relative; margin-bottom: 30px; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -34px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background-color: #ffc107;
+      border: 3px solid #6a1b9a;
+    }
+    .timeline-item h4 {
+      font-family: 'Poppins', sans-serif;
+      color: #1a1a2e;
+      font-size: 17px;
+    }
+    .timeline-item .when { font-size: 13px; color: #888; margin-bottom: 6px; }
+    .timeline-item p { color: #555; font-size: 14px; }
+
+    /* ============================================================
+       Testimonials
+       ============================================================ */
+    .testimonials { background: white; }
+    .testimonial-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      justify-content: center;
+    }
+    .testimonial {
+      flex: 1 1 260px;
+      max-width: 320px;
+      background: #fff8f0;
+      padding: 25px;
+      border-radius: 12px;
+      border-left: 5px solid #d6336c;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    }
+    .testimonial p {
+      font-style: italic;
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+    .testimonial .author {
+      font-weight: 600;
+      color: #6a1b9a;
+      font-size: 14px;
+    }
+
+    /* ============================================================
+       TASK 4: Contact section with gradient
+       ============================================================ */
+    .contact {
+      background: linear-gradient(135deg,
+                  #1a1a2e 0%,
+                  #5b2a86 35%,
+                  #d6336c 70%,
+                  #ff8a5c 100%);
+      color: white;
+      text-align: center;
+      padding: 70px 30px;
+    }
+    .contact h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 32px;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    }
+    .contact p {
+      max-width: 520px;
+      margin: 0 auto 30px;
+      opacity: 0.95;
+    }
+    .contact-form {
+      max-width: 480px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: rgba(255, 255, 255, 0.75); }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: 3px solid #ffc107;
+      background: rgba(255, 255, 255, 0.22);
+    }
+    .contact-form textarea { min-height: 110px; resize: vertical; }
+    .contact-form button {
+      background-color: #ffc107;
+      color: #1a1a2e;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 13px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .contact-form button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      background-color: #1a1a2e;
+      color: #bbb;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 13px;
+    }
+    footer a { color: #ffc107; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .social-row {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 12px;
+    }
+    .social-row a { font-size: 20px; color: #ffc107; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 34px; }
+      .section-title { font-size: 26px; }
+      nav { padding: 14px 16px; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       TASK 1: Navigation bar
+       ============================================================ -->
+  <nav aria-label="Main Navigation">
+    <div class="logo">Piyush Patidar</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <header class="hero">
+    <h1>Hi, I'm Piyush 👋</h1>
+    <p class="tagline">Front-End Intern · CSS Enthusiast · Building clean, accessible UIs</p>
+    <div class="cta-group">
+      <a href="#projects" class="btn btn-primary">View My Work</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       TASK 2: About Me (no image)
+       ============================================================ -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-content">
+        <h2>About Me</h2>
+        <p>
+          I'm <strong>Piyush Patidar</strong>, a front-end intern based in Indore with a growing
+          love for clean CSS, accessible design, and pixel-perfect layouts. I enjoy turning
+          designs into responsive interfaces that work on any screen.
+        </p>
+        <p>
+          Right now I'm sharpening my skills in <strong>Flexbox</strong>, <strong>CSS Grid</strong>,
+          and vanilla <strong>JavaScript</strong>. I also love experimenting with gradients,
+          shadows, and micro-interactions that make UIs feel alive.
+        </p>
+        <p>
+          When I'm not coding, you'll find me sketching wireframes, watching front-end talks,
+          or perfecting my chai recipe.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SKILLS
+       ============================================================ -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <h2 class="section-title">Skills</h2>
+      <p class="section-sub">Tools and technologies I use every day</p>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="icon">🌐</div>
+          <h4>HTML5</h4>
+          <div class="progress-bar"><span style="width: 90%;"></span></div>
+        </div>
+        <div class="skill-card">
+          <div class="icon">🎨</div>
+          <h4>CSS3 / Flexbox</h4>
+          <div class="progress-bar"><span style="width: 85%;"></span></div>
+        </div>
+        <div class="skill-card">
+          <div class="icon">⚡</div>
+          <h4>JavaScript</h4>
+          <div class="progress-bar"><span style="width: 70%;"></span></div>
+        </div>
+        <div class="skill-card">
+          <div class="icon">📱</div>
+          <h4>Responsive Design</h4>
+          <div class="progress-bar"><span style="width: 80%;"></span></div>
+        </div>
+        <div class="skill-card">
+          <div class="icon">♿</div>
+          <h4>Web Accessibility</h4>
+          <div class="progress-bar"><span style="width: 75%;"></span></div>
+        </div>
+        <div class="skill-card">
+          <div class="icon">🔧</div>
+          <h4>Git &amp; GitHub</h4>
+          <div class="progress-bar"><span style="width: 70%;"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TASK 3: Projects — Flexbox responsive grid
+       ============================================================ -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-sub">A few things I've built while learning</p>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <span class="project-tag">HTML · CSS</span>
+          <h3>Recipe Finder</h3>
+          <p>A responsive recipe search layout with a hero section and card grid built using Flexbox.</p>
+        </article>
+
+        <article class="project-card">
+          <span class="project-tag">JavaScript</span>
+          <h3>Movie Watchlist</h3>
+          <p>A small app to save favourite films using <code>localStorage</code>. Practiced DOM manipulation.</p>
+        </article>
+
+        <article class="project-card">
+          <span class="project-tag">CSS Grid</span>
+          <h3>Food Delivery UI</h3>
+          <p>A Swiggy-style homepage mock with responsive restaurant cards and hover animations.</p>
+        </article>
+
+        <article class="project-card">
+          <span class="project-tag">Accessibility</span>
+          <h3>Portfolio v1</h3>
+          <p>My first accessible portfolio — semantic HTML, ARIA labels, and keyboard-friendly navigation.</p>
+        </article>
+
+        <article class="project-card">
+          <span class="project-tag">Flexbox</span>
+          <h3>Pricing Tables</h3>
+          <p>Three pricing cards laid out with Flexbox that wrap gracefully on smaller screens.</p>
+        </article>
+
+        <article class="project-card">
+          <span class="project-tag">CSS Effects</span>
+          <h3>IPL Player Cards</h3>
+          <p>Player cards using <code>border-radius</code>, <code>box-shadow</code>, and <code>text-shadow</code>.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       STATS BAR
+       ============================================================ -->
+  <section class="stats" aria-label="Portfolio statistics">
+    <div class="stats-grid">
+      <div class="stat"><h3>15+</h3><p>Projects Built</p></div>
+      <div class="stat"><h3>6</h3><p>Months Coding</p></div>
+      <div class="stat"><h3>100%</h3><p>Curiosity</p></div>
+      <div class="stat"><h3>∞</h3><p>Cups of Chai</p></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EXPERIENCE TIMELINE
+       ============================================================ -->
+  <section class="experience" id="experience">
+    <div class="container">
+      <h2 class="section-title">Experience</h2>
+      <p class="section-sub">My journey so far</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <h4>Front-End Intern · TechNova Solutions</h4>
+          <p class="when">Jan 2025 – Present · Indore</p>
+          <p>Building responsive UI components in HTML, CSS, and JavaScript. Collaborating with senior devs on accessibility reviews.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Freelance Web Designer</h4>
+          <p class="when">Aug 2024 – Dec 2024 · Remote</p>
+          <p>Designed landing pages for two local businesses using Flexbox and Google Fonts.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Self-Taught Front-End Learner</h4>
+          <p class="when">2023 – 2024</p>
+          <p>Completed freeCodeCamp's Responsive Web Design certification and built 10+ mini-projects.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TESTIMONIALS
+       ============================================================ -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title">What People Say</h2>
+      <p class="section-sub">Kind words from mentors and clients</p>
+
+      <div class="testimonial-grid">
+        <div class="testimonial">
+          <p>"Piyush picks up new CSS concepts fast and applies them cleanly. Great attention to spacing and detail."</p>
+          <div class="author">— Anjali M., Senior Dev</div>
+        </div>
+        <div class="testimonial">
+          <p>"Delivered our landing page ahead of schedule and it looks fantastic on mobile."</p>
+          <div class="author">— Rohit K., Small Business Owner</div>
+        </div>
+        <div class="testimonial">
+          <p>"A curious learner who asks the right questions. Would happily work with him again."</p>
+          <div class="author">— Sneha R., Mentor</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TASK 4: Contact section with gradient
+       ============================================================ -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2>Let's Build Something Together</h2>
+      <p>Open to internships, freelance work, and friendly front-end chats.</p>
+
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Thanks! Piyush will get back to you soon.');">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer>
+    <div class="social-row">
+      <a href="#" aria-label="GitHub profile">🐙</a>
+      <a href="#" aria-label="LinkedIn profile">💼</a>
+      <a href="#" aria-label="Twitter profile">🐦</a>
+    </div>
+    <p>© 2025 Piyush Patidar · Built with HTML, CSS &amp; a lot of chai ☕</p>
+  </footer>
+
+</body>
+</html>
