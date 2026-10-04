@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Cards Practice – Spotify, Flipkart, BookMyShow, Zomato, IPL</title>
+
+  <style>
+    /* ---------- Global styling ---------- */
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 30px 20px;
+      color: #222;
+    }
+    h1.page-title {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .card-label {
+      font-size: 13px;
+      font-weight: bold;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    /* ============================================================
+       TASK 1: Spotify Artist Card
+       Uses border-radius on the card and the artist image
+       ============================================================ */
+    .spotify-card {
+      width: 260px;
+      background-color: #181818;
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+      border-radius: 20px;
+      transition: transform 0.2s ease;
+    }
+    .spotify-card:hover { transform: translateY(-5px); }
+    .spotify-card img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #1db954;
+    }
+    .spotify-card h2 { margin: 15px 0 5px; font-size: 20px; }
+    .spotify-card p { margin: 0; color: #b3b3b3; font-size: 14px; }
+    .spotify-btn {
+      display: inline-block;
+      margin-top: 15px;
+      background-color: #1db954;
+      color: black;
+      font-weight: bold;
+      padding: 8px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    /* ============================================================
+       TASK 2: Flipkart-style Product Card
+       Uses box-shadow for elevated, modern look
+       ============================================================ */
+    .flipkart-card {
+      width: 260px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12),
+                  0 2px 6px rgba(0, 0, 0, 0.08);
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .flipkart-card:hover {
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18),
+                  0 4px 10px rgba(0, 0, 0, 0.1);
+      transform: translateY(-3px);
+    }
+    .flipkart-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .flipkart-card h3 { margin: 14px 0 6px; color: #212121; font-size: 18px; }
+    .flipkart-card .price { color: #388e3c; font-weight: bold; font-size: 20px; }
+    .flipkart-card .old-price {
+      color: #999;
+      text-decoration: line-through;
+      font-size: 14px;
+      margin-left: 8px;
+    }
+
+    /* ============================================================
+       TASK 3: BookMyShow-style Movie Poster Card
+       Uses text-shadow on the heading
+       ============================================================ */
+    .movie-card {
+      width: 260px;
+      height: 380px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      background-image: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=500');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: flex-end;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    }
+    .movie-card .movie-info {
+      width: 100%;
+      padding: 20px 15px;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0));
+    }
+    .movie-card h3 {
+      margin: 0;
+      color: white;
+      font-size: 26px;
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9),
+                   0 0 12px rgba(220, 20, 60, 0.7);
+    }
+    .movie-card p { margin: 6px 0 0; color: #e0e0e0; font-size: 14px; }
+
+    /* ============================================================
+       TASK 4: Zomato-style Restaurant Card
+       Uses background-image + semi-transparent overlay
+       ============================================================ */
+    .zomato-card {
+      width: 260px;
+      height: 320px;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500');
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .zomato-card .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 18px 16px;
+      background-color: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(3px);
+      color: white;
+    }
+    .zomato-card .overlay h3 { margin: 0 0 5px; font-size: 20px; }
+    .zomato-card .overlay p { margin: 0; font-size: 13px; color: #ddd; }
+    .zomato-card .rating {
+      display: inline-block;
+      background-color: #2e7d32;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-top: 6px;
+    }
+
+    /* ============================================================
+       TASK 5: IPL Player Card — MS Dhoni
+       Uses all four: border-radius, box-shadow, text-shadow, background-image
+       ============================================================ */
+    .ipl-card {
+      width: 300px;
+      height: 420px;
+      border-radius: 22px;
+      overflow: hidden;
+      position: relative;
+      /* background-image: stadium behind everything */
+      background-image: url('https://images.unsplash.com/photo-1540748010742-8e2e42e2d4d4?w=500');
+      background-size: cover;
+      background-position: center;
+      /* box-shadow: elevated + gold glow */
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4),
+                  0 0 30px rgba(255, 193, 7, 0.45);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .ipl-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45),
+                  0 0 40px rgba(255, 193, 7, 0.65);
+    }
+    /* Dark gradient overlay for readability */
+    .ipl-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+                  rgba(0, 0, 0, 0.35) 0%,
+                  rgba(0, 0, 0, 0.15) 40%,
+                  rgba(0, 0, 0, 0.9) 100%);
+      z-index: 1;
+    }
+    /* Dhoni's photo inside a rounded frame */
+    .ipl-card .player-photo {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 50%;
+      border: 4px solid #ffc107;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6),
+                  0 0 25px rgba(255, 193, 7, 0.55);
+      z-index: 2;
+      background-color: #1a1a1a;
+    }
+    /* Info block */
+    .ipl-card .player-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 22px 20px;
+      color: white;
+      z-index: 3;
+      text-align: center;
+    }
+    .ipl-card h3 {
+      margin: 0 0 4px;
+      font-size: 28px;
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.95),
+                   0 0 18px rgba(255, 193, 7, 0.85);
+    }
+    .ipl-card .team {
+      margin: 0;
+      font-size: 13px;
+      color: #ffc107;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    .ipl-card .stats {
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-around;
+      font-size: 11px;
+      color: #ddd;
+      border-top: 1px solid rgba(255, 193, 7, 0.4);
+      padding-top: 12px;
+    }
+    .ipl-card .stats span strong {
+      display: block;
+      color: #ffc107;
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+    .ipl-card .badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: #ffc107;
+      color: #000;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 5px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      z-index: 4;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="page-title">CSS Card Design Practice 🎨</h1>
+
+  <div class="grid">
+
+    <!-- ============================================================
+         TASK 1: Spotify Artist Card
+         ============================================================ -->
+    <div class="card-wrap">
+      <p class="card-label">1 · Spotify Artist</p>
+      <div class="spotify-card">
+        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300"
+             alt="Portrait of Arijit Singh, Indian playback singer">
+        <h2>Arijit Singh</h2>
+        <p>Top Song: Tum Hi Ho</p>
+        <a class="spotify-btn" href="#" aria-label="Play Arijit Singh on Spotify">▶ Play</a>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         TASK 2: Flipkart-style Product Card
+         ============================================================ -->
+    <div class="card-wrap">
+      <p class="card-label">2 · Flipkart Product</p>
+      <div class="flipkart-card">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"
+             alt="Black wireless over-ear headphones on a plain background">
+        <h3>boAt Rockerz 450</h3>
+        <p>
+          <span class="price">₹1,499</span>
+          <span class="old-price">₹3,990</span>
+        </p>
+        <p style="color:#878787; font-size:13px; margin-top:4px;">62% off · Free delivery</p>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         TASK 3: BookMyShow-style Movie Poster Card
+         ============================================================ -->
+    <div class="card-wrap">
+      <p class="card-label">3 · Movie Poster</p>
+      <div class="movie-card">
+        <div class="movie-info">
+          <h3>BLOCKBUSTER</h3>
+          <p>Action · Thriller · UA 13+</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         TASK 4: Zomato-style Restaurant Card
+         ============================================================ -->
+    <div class="card-wrap">
+      <p class="card-label">4 · Zomato Restaurant</p>
+      <div class="zomato-card">
+        <div class="overlay">
+          <h3>Spice Route</h3>
+          <p>North Indian · Biryani · Mughlai</p>
+          <span class="rating">★ 4.5 (2.3K)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         TASK 5: IPL Player Card — MS Dhoni
+         (border-radius + box-shadow + text-shadow + background-image)
+         ============================================================ -->
+    <div class="card-wrap">
+      <p class="card-label">5 · IPL Player</p>
+      <div class="ipl-card">
+        <span class="badge">CAPTAIN</span>
+
+        <!-- MS Dhoni photo from the URL you provided.
+             onerror swaps to a placeholder if the CDN ever blocks the request. -->
+        <img class="player-photo"
+             src="https://sc0.blr1.cdn.digitaloceanspaces.com/article/190034-yqirygxsfs-1683737760.jpg"
+             alt="MS Dhoni, captain of Chennai Super Kings, in his yellow IPL jersey"
+             referrerpolicy="no-referrer"
+             onerror="this.onerror=null; this.src='https://via.placeholder.com/170/ffc107/000000?text=MSD';">
+
+        <div class="player-info">
+          <h3>MS Dhoni</h3>
+          <p class="team">CHENNAI SUPER KINGS</p>
+          <div class="stats">
+            <span><strong>5</strong>Titles</span>
+            <span><strong>250+</strong>Matches</span>
+            <span><strong>#7</strong>Jersey</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
