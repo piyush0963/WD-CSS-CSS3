@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Colors, Gradients & Fonts Practice</title>
+
+  <!-- ============================================================
+       TASK 3: Load two Google Fonts
+       - Poppins (headings)
+       - Inter (paragraphs)
+       ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet">
+
+  <!-- ============================================================
+       TASK 5: Trending font for the banner headline
+       - 'Bricolage Grotesque' is a modern, trendy display font
+         popular in 2024-25 for youth-focused brands.
+       ============================================================ -->
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&display=swap"
+        rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       Global styling
+       ============================================================ */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      /* TASK 3: paragraph font = Inter */
+      font-family: 'Inter', Arial, sans-serif;
+      background-color: #f5f6f7;
+      color: #222;
+      line-height: 1.6;
+      padding: 30px 20px;
+    }
+
+    /* TASK 3: ALL headings use Poppins */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section {
+      background-color: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    }
+
+    .section-title {
+      font-size: 22px;
+      margin-bottom: 20px;
+      border-left: 5px solid #ff5722;
+      padding-left: 12px;
+    }
+
+    /* ============================================================
+       TASK 1: Three coloured boxes (RGB, HEX, named color)
+       ============================================================ */
+    .boxes-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .box {
+      width: 200px;
+      height: 130px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s ease;
+    }
+    .box:hover { transform: translateY(-4px); }
+
+    /* Box 1: RGB color */
+    .box-rgb {
+      background-color: rgb(52, 152, 219); /* medium blue */
+    }
+    /* Box 2: HEX color */
+    .box-hex {
+      background-color: #e74c3c;           /* flat red */
+    }
+    /* Box 3: Named color */
+    .box-named {
+      background-color: mediumseagreen;    /* named color */
+    }
+
+    /* ============================================================
+       TASK 2 + TASK 5: Banner with linear gradient +
+       Bricolage Grotesque headline
+       ============================================================ */
+    .banner {
+      /* TASK 2: linear gradient with two+ colors */
+      background-image: linear-gradient(135deg,
+                        #ff5722 0%,
+                        #ff9800 50%,
+                        #ffc107 100%);
+      color: white;                        /* TASK 2: white text for contrast */
+      padding: 60px 30px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(255, 87, 34, 0.35);
+      margin-bottom: 30px;
+    }
+    .banner h1 {
+      /* TASK 5: Bricolage Grotesque for the headline */
+      font-family: 'Bricolage Grotesque', 'Poppins', sans-serif;
+      font-size: 44px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    }
+    .banner p {
+      font-size: 17px;
+      opacity: 0.95;
+      margin-bottom: 22px;
+      font-family: 'Inter', sans-serif;
+    }
+    .banner button {
+      background-color: white;
+      color: #ff5722;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      padding: 13px 30px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .banner button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+    }
+
+    /* ============================================================
+       TASK 4: Readability — before vs after
+       ============================================================ */
+    .readability-demo {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+    .readability-col {
+      flex: 1 1 300px;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .readability-col h4 {
+      font-size: 15px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    /* BEFORE: hard to read */
+    .before-col {
+      background-color: #fff5f5;
+      border: 1px dashed #ffb3b3;
+    }
+    .before-col h4 { color: #c62828; }
+    .before-text {
+      /* Deliberately bad choices to show the difference */
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+      font-size: 14px;
+      color: #555;
+    }
+    /* AFTER: improved readability */
+    .after-col {
+      background-color: #f1f8e9;
+      border: 1px dashed #aed581;
+    }
+    .after-col h4 { color: #2e7d32; }
+    .after-text {
+      /* Better readability */
+      font-weight: 500;          /* slightly bolder */
+      letter-spacing: 0.2px;     /* subtle breathing room */
+      line-height: 1.75;         /* comfortable leading */
+      font-size: 15px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- ============================================================
+         TASK 2 + TASK 5: Banner with gradient + trending font
+         ============================================================ -->
+    <div class="banner">
+      <h1>Craving Something? We Deliver in 15 Minutes 🛵</h1>
+      <p>Fresh meals from your favourite restaurants — right to your door.</p>
+      <button>Order Now</button>
+    </div>
+
+    <!-- ============================================================
+         TASK 1: Three coloured boxes
+         ============================================================ -->
+    <section>
+      <h2 class="section-title">Task 1 · Three Coloured Boxes</h2>
+      <div class="boxes-row">
+        <div class="box box-rgb">
+          RGB<br>rgb(52, 152, 219)
+        </div>
+        <div class="box box-hex">
+          HEX<br>#e74c3c
+        </div>
+        <div class="box box-named">
+          Named<br>mediumseagreen
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TASK 3: Google Fonts demo
+         ============================================================ -->
+    <section>
+      <h2 class="section-title">Task 3 · Google Fonts Demo</h2>
+      <h3>This heading uses Poppins</h3>
+      <p>
+        This paragraph uses Inter. All headings on this page use the Poppins
+        Google Font, and all paragraph text uses Inter for a clean,
+        readable body.
+      </p>
+    </section>
+
+    <!-- ============================================================
+         TASK 4: Readability — before vs after
+         ============================================================ -->
+    <section>
+      <h2 class="section-title">Task 4 · Readability (Before vs After)</h2>
+
+      <div class="readability-demo">
+
+        <!-- BEFORE column -->
+        <div class="readability-col before-col">
+          <h4>❌ Before</h4>
+          <p class="before-text">
+            Spice Route is a North Indian restaurant serving authentic biryani,
+            kebabs, and curries. We use fresh ingredients and traditional
+            recipes to deliver the true taste of Hyderabad to your doorstep
+            every single day.
+          </p>
+        </div>
+
+        <!-- AFTER column -->
+        <div class="readability-col after-col">
+          <h4>✅ After</h4>
+          <p class="after-text">
+            Spice Route is a North Indian restaurant serving authentic biryani,
+            kebabs, and curries. We use fresh ingredients and traditional
+            recipes to deliver the true taste of Hyderabad to your doorstep
+            every single day.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Explanation as code comments -->
+      <p style="margin-top:20px; font-size:14px; color:#555;">
+        <strong>Why "After" is more readable:</strong>
+      </p>
+      <ul style="margin-left:20px; font-size:14px; color:#444; line-height:1.8;">
+        <li><code>font-weight</code> raised from <strong>300</strong> → <strong>500</strong> so thin strokes don't disappear on smaller screens.</li>
+        <li><code>letter-spacing</code> changed from <strong>-0.5px</strong> → <strong>0.2px</strong> to give letters breathing room.</li>
+        <li><code>line-height</code> increased from <strong>1.1</strong> → <strong>1.75</strong> so lines don't feel cramped.</li>
+        <li><code>font-size</code> bumped from <strong>14px</strong> → <strong>15px</strong> for a more comfortable reading size.</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================
+         TASK 5: Font choice explanation
+         ============================================================ -->
+    <section>
+      <h2 class="section-title">Task 5 · Why "Bricolage Grotesque" for the Banner?</h2>
+      <p>
+        I chose <strong>Bricolage Grotesque</strong> for the banner headline because:
+      </p>
+      <ul style="margin-left:20px; margin-top:12px; line-height:1.9; color:#333;">
+        <li><strong>Youthful &amp; trendy:</strong> It's a recent release on Google Fonts that's quickly become a favourite for modern startups, food apps, and D2C brands.</li>
+        <li><strong>High impact at large sizes:</strong> Its slightly condensed, chunky letterforms feel confident and bold — perfect for a 44px headline.</li>
+        <li><strong>Playful yet readable:</strong> The quirky details (like the double-storey 'a') add personality without hurting legibility.</li>
+        <li><strong>Complements the gradient:</strong> Against the warm orange-yellow gradient, the heavy geometric sans holds its own and pops with a subtle text-shadow.</li>
+      </ul>
+      <p style="margin-top:14px; color:#555; font-size:14px;">
+        For a youth-focused food app, "vibe" matters as much as function.
+        Bricolage Grotesque delivers both — modern, energetic, and unmistakably now.
+      </p>
+    </section>
+
+  </div>
+
+</body>
+</html>
