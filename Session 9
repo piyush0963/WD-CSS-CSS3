@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Animations & Responsive Lab</title>
+
+<!-- ============================================================
+     TASK 2: GSAP via CDN
+     ============================================================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<style>
+  /* ============================================================
+     TASK 1: Animista 'Bounce' Animation for BookMyShow Button
+     ------------------------------------------------------------
+     Animation: bounce-in (or similar bounce effect from Animista)
+     Applied to .book-now-btn:hover
+     ============================================================ */
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-20px);
+    }
+    60% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .book-now-btn {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(238, 90, 36, 0.4);
+  }
+
+  .book-now-btn:hover {
+    animation: bounce 0.8s ease infinite;
+    box-shadow: 0 6px 20px rgba(238, 90, 36, 0.6);
+  }
+
+  /* Mock BookMyShow homepage container */
+  .bms-homepage {
+    background: #1a1a2e;
+    color: white;
+    padding: 40px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .bms-homepage h2 {
+    margin-top: 0;
+    color: #ff6b6b;
+  }
+
+  /* ============================================================
+     TASK 2: Flipkart-style Product Card
+     ============================================================ */
+  .flipkart-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 300px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .flipkart-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #f0f0f0;
+  }
+
+  .flipkart-card h3 {
+    font-size: 16px;
+    margin: 12px 0 6px;
+    color: #212121;
+  }
+
+  .flipkart-card .price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #388e3c;
+  }
+
+  .flipkart-card .original-price {
+    font-size: 14px;
+    color: #9e9e9e;
+    text-decoration: line-through;
+    margin-left: 8px;
+  }
+
+  /* ============================================================
+     TASK 3: Responsive Navigation Bar
+     ------------------------------------------------------------
+     Desktop (>1024px): horizontal flex
+     Tablet (768px-1024px): vertical stack
+     Mobile (<768px): hamburger menu
+     ============================================================ */
+  .responsive-nav {
+    background: #2d3436;
+    padding: 0 20px;
+    margin-bottom: 40px;
+  }
+
+  .nav-links {
+    display: flex;          /* Default: desktop horizontal */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 24px;
+  }
+
+  .nav-links li a {
+    color: white;
+    text-decoration: none;
+    padding: 16px 8px;
+    display: block;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links li a:hover {
+    color: #74b9ff;
+  }
+
+  .hamburger {
+    display: none;          /* Hidden on desktop */
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    padding: 12px 0;
+  }
+
+  /* Tablet: 768px - 1024px → vertical stack */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .nav-links {
+      flex-direction: column;
+      gap: 0;
+    }
+    .nav-links li a {
+      padding: 12px 8px;
+      border-bottom: 1px solid #444;
+    }
+  }
+
+  /* Mobile: < 768px → hamburger menu */
+  @media (max-width: 767px) {
+    .hamburger {
+      display: block;
+    }
+    .nav-links {
+      display: none;        /* Hidden by default on mobile */
+      flex-direction: column;
+      gap: 0;
+    }
+    .nav-links.open {
+      display: flex;        /* Toggled via JS */
+    }
+  }
+
+  /* ============================================================
+     TASK 4: Mobile-First Zomato Restaurant Listing
+     ------------------------------------------------------------
+     Base: mobile (320px)
+     Tablet (768px): 2 columns
+     Laptop (1024px): 3 columns
+     Desktop (1200px): 4 columns
+     ============================================================ */
+  .zomato-listing {
+    padding: 16px;
+    background: #fff;
+    border-radius: 12px;
+    margin-bottom: 40px;
+  }
+
+  .zomato-listing h2 {
+    font-size: 1.25rem;     /* Mobile base */
+    margin: 0 0 16px;
+    color: #e23744;
+  }
+
+  .restaurant-grid {
+    display: grid;
+    grid-template-columns: 1fr;  /* Mobile: 1 column */
+    gap: 12px;
+  }
+
+  .restaurant-card {
+    background: #f8f8f8;
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #eee;
+  }
+
+  .restaurant-card h3 {
+    font-size: 1rem;
+    margin: 0 0 4px;
+  }
+
+  .restaurant-card p {
+    font-size: 0.875rem;
+    color: #666;
+    margin: 0;
+  }
+
+  /* Tablet: 768px → 2 columns */
+  @media (min-width: 768px) {
+    .zomato-listing { padding: 24px; }
+    .zomato-listing h2 { font-size: 1.5rem; }
+    .restaurant-grid { grid-template-columns: repeat(2, 1fr); }
+    .restaurant-card h3 { font-size: 1.125rem; }
+  }
+
+  /* Laptop: 1024px → 3 columns */
+  @media (min-width: 1024px) {
+    .zomato-listing { padding: 32px; }
+    .zomato-listing h2 { font-size: 1.75rem; }
+    .restaurant-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* Desktop: 1200px → 4 columns */
+  @media (min-width: 1200px) {
+    .zomato-listing h2 { font-size: 2rem; }
+    .restaurant-grid { grid-template-columns: repeat(4, 1fr); }
+    .restaurant-card h3 { font-size: 1.25rem; }
+  }
+
+  /* ============================================================
+     TASK 5: Performance Best Practice Implementation
+     ------------------------------------------------------------
+     CHATGPT SUGGESTION: "Prefer transform and opacity for animations
+     instead of layout-affecting properties like width/height/top/left.
+     Use media queries to disable heavy animations on mobile."
+     ------------------------------------------------------------
+     Implementation below: The bounce animation uses only transform
+     (translateY), and we add a media query to respect reduced motion.
+     ============================================================ */
+  @media (prefers-reduced-motion: reduce) {
+    .book-now-btn:hover {
+      animation: none;
+    }
+  }
+
+  /* ============================================================
+     GLOBAL RESET & BODY
+     ============================================================ */
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f5f6fa;
+    margin: 0;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 18px;
+    color: #2d3436;
+    border-left: 4px solid #6c5ce7;
+    padding-left: 10px;
+    margin: 32px 0 16px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ TASK 1: BookMyShow Mock Homepage ============ -->
+<h1>1. BookMyShow — Bouncing "Book Now" Button</h1>
+<div class="bms-homepage">
+  <h2>🎬 BookMyShow</h2>
+  <p style="color:#aaa; margin-bottom:20px;">Now showing: The Midnight Protocol</p>
+  <button class="book-now-btn">Book Now 🎟️</button>
+  <p style="font-size:12px; color:#666; margin-top:12px;">
+    Hover the button to see the bounce animation (Animista-generated style).
+  </p>
+</div>
+
+<!-- ============ TASK 2: Flipkart-style Product Card ============ -->
+<h1>2. Flipkart Product Card — GSAP Entrance Animation</h1>
+<div class="flipkart-card">
+  <div style="height:180px; background:#e8e8e8; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:48px;">📱</div>
+  <h3>Smartphone X Pro 5G (Midnight Black)</h3>
+  <div>
+    <span class="price">₹24,999</span>
+    <span class="original-price">₹32,999</span>
+  </div>
+</div>
+
+<!-- ============ TASK 3: Responsive Navigation ============ -->
+<h1>3. Responsive Nav Bar</h1>
+<nav class="responsive-nav">
+  <div class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Movies</a></li>
+    <li><a href="#">Events</a></li>
+    <li><a href="#">Plays</a></li>
+    <li><a href="#">Sports</a></li>
+  </ul>
+</nav>
+
+<!-- ============ TASK 4: Zomato Restaurant Listing ============ -->
+<h1>4. Zomato Restaurant Listing — Mobile-First Grid</h1>
+<div class="zomato-listing">
+  <h2>Restaurants Near You</h2>
+  <div class="restaurant-grid">
+    <div class="restaurant-card">
+      <h3>Spice Garden</h3>
+      <p>North Indian • 4.2★ • 30 min</p>
+    </div>
+    <div class="restaurant-card">
+      <h3>Dragon Wok</h3>
+      <p>Chinese • 4.0★ • 25 min</p>
+    </div>
+    <div class="restaurant-card">
+      <h3>Bella Italia</h3>
+      <p>Italian • 4.5★ • 35 min</p>
+    </div>
+    <div class="restaurant-card">
+      <h3>Sushi House</h3>
+      <p>Japanese • 4.3★ • 40 min</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TASK 2: GSAP Animation
+     Fade in + slide up on page load using gsap.from()
+     ============================================================ -->
+<script>
+  gsap.from('.flipkart-card', {
+    opacity: 0,
+    y: 50,
+    duration: 0.8,
+    ease: 'power3.out',
+    delay: 0.3
+  });
+</script>
+
+<!-- ============================================================
+     TASK 5: ChatGPT Suggestion (Pasted)
+     ------------------------------------------------------------
+     ChatGPT Suggested Best Practices:
+
+     1. **Animate transform and opacity, not layout properties.**
+        Properties like `width`, `height`, `top`, and `left` trigger
+        expensive layout recalculations on every frame. `transform`
+        and `opacity` can be handled by the GPU compositor, keeping
+        animations at 60fps even on low-end mobile devices.
+
+     2. **Respect `prefers-reduced-motion` and disable heavy
+        animations on mobile.**
+        Some users experience motion sickness. Use
+        `@media (prefers-reduced-motion: reduce)` to turn off
+        non-essential animations, and consider simplifying or
+        removing animations for mobile screens where CPU/GPU
+        resources are limited.
+
+     3. **Keep animation durations short (100–300ms) and avoid
+        infinite loops for critical UI.**
+        Long or repeating animations drain battery and distract
+        users. Reserve longer, looped animations for decorative
+        elements only, and never block interaction while an
+        animation plays.
+
+     ------------------------------------------------------------
+     IMPLEMENTATION SHOWN ABOVE:
+     - The `.book-now-btn:hover` bounce uses ONLY `transform: translateY()`
+       (no top/margin changes), satisfying suggestion #1.
+     - The `@media (prefers-reduced-motion: reduce)` block disables
+       the bounce animation entirely, satisfying suggestion #2.
+     ============================================================ -->
+</body>
+</html>
