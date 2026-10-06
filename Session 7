@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CSS Cascade Lab — Profile / Playlist / Hashtags</title>
+
+<!-- ============================================================
+     TASK 2 — INTERNAL STYLE BLOCK (combined here for a single file)
+
+     ⚠️ NOTE ON THE CASCADE:
+     In the original task you had an EXTERNAL styles.css and an
+     INTERNAL <style> block. When combined into one file, we place
+     the "external" rules FIRST (as a <style> block) and the
+     "internal" rules SECOND — this preserves the exact same
+     source-order behaviour:
+       • Same selector, same specificity → LATER rule wins.
+       • So .playlist-list ends up ORANGE (from this block),
+         not peach (from the block above).
+     ============================================================ -->
+
+<!-- ---------- "EXTERNAL" STYLES (would normally be styles.css) ---------- -->
+<style>
+  /* ============================================================
+     TASK 2 — CASCADE EXPLANATION
+     ------------------------------------------------------------
+     Q: Why does the second <style> block override the first?
+
+     Both .playlist-list rules have the SAME specificity
+     (one class selector = 0,1,0). When specificity ties, the rule
+     declared LAST in source order wins. The second <style> block
+     is parsed AFTER the first, so it wins → ORANGE background.
+
+     If we swapped the order of the two <style> blocks, the
+     peach color would win instead.
+
+     ============================================================
+     TASK 4 — INHERITANCE vs SPECIFICITY EXPLANATION
+     ------------------------------------------------------------
+     Q: Which font color shows inside .profile-card?
+
+     body { color: #333 } sets a page-wide default (inherited).
+     .profile-card { color: purple } targets the card directly.
+
+     A rule applied DIRECTLY to an element always beats a value
+     that is merely INHERITED from a parent — inheritance is the
+     weakest link in the cascade. Also, a class selector (0,1,0)
+     outranks the body element selector (0,0,1).
+
+     Result: profile card text is PURPLE. Its <h2> and <p>
+     children inherit purple unless they declare their own color.
+     ============================================================ */
+
+  /* ---------- Task 4: Page-wide font color (inherited by all) ---------- */
+  body {
+    color: #333;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f5f6fa;
+    margin: 0;
+    padding: 24px;
+  }
+
+  /* ---------- Task 1: Each section gets its own background ---------- */
+  .profile-card {
+    background-color: #d1f2eb;          /* mint green */
+    color: purple;                      /* Task 4: overrides inherited #333 */
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 500px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  }
+
+  /* Task 1: playlist section background — will be overridden by the
+     second <style> block below (Task 2) */
+  .playlist-list {
+    background-color: #fdebd0;          /* soft peach — loses to internal orange */
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 500px;
+
+    /* ⚠️ TASK 5 BUG (kept intentionally broken here):
+       color: blue is set on the section, but the <li> elements
+       still show black. Why?
+       - The <li>s are NOT direct children of .playlist-list —
+         they are inside a <ul>. color: blue is inherited by the
+         <ul>, but a more specific rule (browser default, reset,
+         or `ul li { color: #000 }`) overrides it for the <li>.
+       - In DevTools you'll see `color: blue` marked as
+         "Inherited from section.playlist-list" and losing.
+       - The FIX is below: .playlist-list ul li { color: blue; } */
+    color: blue;
+  }
+
+  /* ✅ TASK 5 FIX — apply blue directly to the list items */
+  .playlist-list ul li {
+    color: blue;
+  }
+
+  /* ---------- Task 1: Trending hashtags sidebar background ---------- */
+  .hashtags-sidebar {
+    background-color: #d6eaf8;          /* light blue — overridden by inline style (Task 3) */
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 500px;
+  }
+
+  /* ---------- Shared list styling ---------- */
+  section ul, aside ul {
+    padding-left: 20px;
+    margin: 8px 0 0;
+  }
+  section li, aside li {
+    padding: 4px 0;
+  }
+</style>
+
+<!-- ---------- "INTERNAL" STYLE BLOCK (Task 2 — overrides above) ---------- -->
+<style>
+  /* This block is parsed AFTER the first <style> block, so it wins
+     the specificity tie and the playlist background becomes ORANGE. */
+  .playlist-list {
+    background-color: orange;
+  }
+</style>
+
+</head>
+<body>
+
+  <!-- ============ PROFILE CARD ============ -->
+  <section class="profile-card">
+    <h2>🎤 Alex Rivera</h2>
+    <p>Indie producer • 12.4k followers</p>
+    <p>Currently obsessed with lo-fi beats and synthwave.</p>
+  </section>
+
+  <!-- ============ PLAYLIST LIST ============ -->
+  <section class="playlist-list">
+    <h2>My Playlists</h2>
+    <ul>
+      <li>Midnight Coding</li>
+      <li>Sunset Drive</li>
+      <li>Rainy Day Jazz</li>
+      <li>Gym Pump 2025</li>
+      <li>Focus Flow</li>
+    </ul>
+  </section>
+
+  <!-- ============ TRENDING HASHTAGS SIDEBAR ============ -->
+  <!-- TASK 3: The inline style below wins over ALL other background
+       rules for this element (external light blue AND any class rule),
+       because inline styles have the highest specificity (1,0,0,0).
+       Only a stylesheet rule with !important could beat it.
+       → Sidebar background renders PINK. -->
+  <aside class="hashtags-sidebar" style="background-color: pink;">
+    <h2>🔥 Trending Hashtags</h2>
+    <ul>
+      <li>#lofi</li>
+      <li>#synthwave</li>
+      <li>#newmusic</li>
+      <li>#indieartist</li>
+      <li>#beats</li>
+    </ul>
+  </aside>
+
+</body>
+</html>
