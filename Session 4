@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CSS Layouts Demo — Block / Inline / Inline-Block / Float</title>
+<style>
+  /* ---------- GLOBAL ---------- */
+  * { box-sizing: border-box; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f4f6f8;
+  }
+  h1 { font-size: 20px; margin-top: 30px; }
+  h2 { font-size: 16px; color: #333; margin-bottom: 8px; }
+
+  /* =====================================================
+     TASK 1: Block vs Inline vs Inline-Block Sections
+     ===================================================== */
+  .section-block {
+    display: block;              /* default for divs — full width, new line */
+    background: #ffd8a8;
+    border: 2px solid #e8590c;
+    padding: 10px;
+    margin: 6px 0;
+  }
+
+  .section-inline {
+    display: inline;             /* sits on same line; width/height IGNORED */
+    background: #b2f2bb;
+    border: 2px solid #2f9e44;
+    padding: 10px;
+    /* width & height below will be IGNORED by the browser */
+    width: 200px;
+    height: 80px;
+  }
+
+  .section-inline-block {
+    display: inline-block;       /* sits on same line; width/height RESPECTED */
+    background: #a5d8ff;
+    border: 2px solid #1971c2;
+    padding: 10px;
+    width: 200px;
+    height: 80px;
+    vertical-align: top;
+    margin: 6px 4px;
+  }
+
+  /* =====================================================
+     TASK 2: Instagram-style Nav Bar with inline-block
+     ===================================================== */
+  .insta-nav {
+    background: #ffffff;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 0 16px;
+    /* font-size: 0 removes whitespace gaps between inline-block items */
+    font-size: 0;
+  }
+  .insta-nav .logo {
+    display: inline-block;
+    font-size: 22px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 12px 20px 12px 0;
+    vertical-align: middle;
+    font-family: 'Brush Script MT', cursive;
+  }
+  .insta-nav .nav-item {
+    display: inline-block;       /* side by side, but width/height work */
+    width: 110px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    font-size: 15px;
+    color: #262626;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.2s;
+  }
+  .insta-nav .nav-item:hover { background: #efefef; }
+
+  /* =====================================================
+     TASK 3: Two-Column Flipkart-style Layout with Floats
+     TASK 4: Clearfix applied to parent
+     ===================================================== */
+  .flipkart-wrapper {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 12px;
+    margin-top: 10px;
+  }
+
+  .product-list {
+    float: left;
+    width: 68%;
+    background: #e7f5ff;
+    padding: 12px;
+    border: 1px solid #74c0fc;
+  }
+  .cart-sidebar {
+    float: right;
+    width: 28%;
+    background: #fff3bf;
+    padding: 12px;
+    border: 1px solid #f59f00;
+  }
+  .product-card {
+    background: #fff;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .cart-item {
+    border-bottom: 1px dashed #f59f00;
+    padding: 6px 0;
+  }
+
+  /* ---------- TASK 4: CLEARFIX ---------- */
+  .clearfix::after {
+    content: "";
+    display: table;   /* or block */
+    clear: both;
+  }
+
+  /* =====================================================
+     TASK 5: Flexbox equivalent of the two-column layout
+     ===================================================== */
+  .flex-wrapper {
+    display: flex;
+    gap: 16px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 12px;
+    margin-top: 10px;
+    align-items: flex-start;
+  }
+  .flex-wrapper .product-list {
+    float: none;          /* no float needed */
+    flex: 1 1 68%;
+  }
+  .flex-wrapper .cart-sidebar {
+    float: none;
+    flex: 0 0 28%;
+  }
+
+  /* Toggle helper: hide/show */
+  .hidden { display: none; }
+  .toggle-btn {
+    margin-top: 10px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<h1>1. Block vs Inline vs Inline-Block</h1>
+<div class="section-block">Home (display: block — full width, new line)</div>
+<span class="section-inline">Explore (display: inline — width/height ignored)</span>
+<span class="section-inline">Profile (display: inline)</span>
+
+<h1>2. Instagram-style Navigation (inline-block)</h1>
+<nav class="insta-nav">
+  <span class="logo">Instagram</span>
+  <a href="#" class="nav-item">Home</a>
+  <a href="#" class="nav-item">Search</a>
+  <a href="#" class="nav-item">Explore</a>
+  <a href="#" class="nav-item">Reels</a>
+  <a href="#" class="nav-item">Profile</a>
+</nav>
+
+<h1>3 &amp; 4. Flipkart-style Two-Column Layout (float + clearfix)</h1>
+<div class="flipkart-wrapper clearfix">
+  <main class="product-list">
+    <h2>Products</h2>
+    <div class="product-card">📱 Smartphone — ₹15,999</div>
+    <div class="product-card">💻 Laptop — ₹54,990</div>
+    <div class="product-card">🎧 Headphones — ₹1,299</div>
+    <div class="product-card">⌚ Smartwatch — ₹2,499</div>
+    <div class="product-card">🖱️ Mouse — ₹499</div>
+    <div class="product-card">⌨️ Keyboard — ₹899</div>
+  </main>
+
+  <aside class="cart-sidebar">
+    <h2>🛒 Cart</h2>
+    <div class="cart-item">Smartphone × 1</div>
+    <div class="cart-item">Headphones × 2</div>
+    <div class="cart-item">Mouse × 1</div>
+    <p><strong>Total: ₹19,296</strong></p>
+  </aside>
+</div>
+
+<h1>5. Same Layout Rebuilt with Flexbox</h1>
+<div class="flex-wrapper">
+  <main class="product-list">
+    <h2>Products (Flex child)</h2>
+    <div class="product-card">📱 Smartphone — ₹15,999</div>
+    <div class="product-card">💻 Laptop — ₹54,990</div>
+    <div class="product-card">🎧 Headphones — ₹1,299</div>
+  </main>
+  <aside class="cart-sidebar">
+    <h2>🛒 Cart</h2>
+    <div class="cart-item">Smartphone × 1</div>
+    <div class="cart-item">Headphones × 2</div>
+  </aside>
+</div>
+
+</body>
+</html>
